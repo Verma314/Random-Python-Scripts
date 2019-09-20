@@ -1,14 +1,16 @@
 import os
 import humanize
 
-def get_size2(start_path):
+
+def get_size2(folder):
     total_size = os.path.getsize(folder)
     for item in os.listdir(folder):
         itempath = os.path.join(folder, item)
         if os.path.isfile(itempath):
             total_size += os.path.getsize(itempath)
         elif os.path.isdir(itempath):
-            total_size += getFolderSize(itempath)
+            total_size += get_size2(itempath)
+
     return (total_size)
 
 print "Size: " + str(getFolderSize("."))
